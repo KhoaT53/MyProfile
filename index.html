@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bio Link | Your Name</title>
+    <meta
+      name="description"
+      content="Trang bio cá nhân kiểu Linktree để chia sẻ mạng xã hội, portfolio và liên hệ."
+    />
+    <meta property="og:title" content="Your Name | Bio Link" />
+    <meta
+      property="og:description"
+      content="Tất cả liên kết quan trọng của bạn trong một trang."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200&auto=format&fit=crop" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #07111f;
+        --bg-soft: rgba(255, 255, 255, 0.08);
+        --card: rgba(10, 19, 34, 0.78);
+        --text: #f4f7fb;
+        --muted: #aac0db;
+        --line: rgba(255, 255, 255, 0.12);
+        --primary: #7c3aed;
+        --primary-2: #22c55e;
+        --button-text: #ffffff;
+        --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        --max-width: 460px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(124, 58, 237, 0.28), transparent 32%),
+          radial-gradient(circle at top right, rgba(34, 197, 94, 0.18), transparent 25%),
+          linear-gradient(160deg, #050b14 0%, #09172c 45%, #08111d 100%);
+        min-height: 100vh;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 28px 18px;
+      }
+
+      .shell {
+        width: 100%;
+        max-width: var(--max-width);
+      }
+
+      .card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--card);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 28px 24px 20px;
+        margin: 0px 0px 20px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -30% auto auto -20%;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(124, 58, 237, 0.25), transparent 65%);
+        pointer-events: none;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 14px;
+      }
+
+      .theme-toggle {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 0.92rem;
+        transition: 0.25s ease;
+      }
+
+      .theme-toggle:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .profile {
+        text-align: center;
+      }
+
+      .avatar-wrap {
+        width: 112px;
+        height: 112px;
+        margin: 0 auto 16px;
+        padding: 4px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--primary-2));
+        box-shadow: 0 14px 35px rgba(124, 58, 237, 0.35);
+      }
+
+      .avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+        border: 3px solid rgba(255, 255, 255, 0.95);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.9rem;
+        line-height: 1.1;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .handle {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .bio {
+        max-width: 320px;
+        margin: 14px auto 18px;
+        color: #e1ecf8;
+        font-size: 0.98rem;
+        line-height: 1.7;
+      }
+
+      .pills {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .pill {
+        padding: 9px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+        font-size: 0.87rem;
+        font-weight: 600;
+      }
+
+      .section {
+        padding: 20px 18px 20px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin: 0 6px 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .links {
+        display: grid;
+        gap: 12px;
+      }
+
+      .link-card {
+        display: grid;
+        grid-template-columns: 48px 1fr auto;
+        gap: 14px;
+        align-items: center;
+        padding: 14px 14px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+        transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      }
+
+      .link-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 255, 255, 0.24);
+        background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      }
+
+      .icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.18), rgba(34, 197, 94, 0.16));
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        font-size: 1.2rem;
+      }
+
+      .link-text {
+        min-width: 0;
+      }
+
+      .link-title {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--text);
+      }
+
+      .link-desc {
+        margin-top: 4px;
+        font-size: 0.9rem;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .arrow {
+        font-size: 1.15rem;
+        color: var(--muted);
+      }
+
+      .highlight {
+        margin: 20px 18px 20px;
+        padding: 18px;
+        border-radius: 24px;
+        border: 1px solid rgba(124, 58, 237, 0.28);
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.16), rgba(34, 197, 94, 0.08));
+      }
+
+      .highlight-label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #d8c6ff;
+      }
+
+      .highlight-title {
+        margin-top: 8px;
+        font-size: 1.15rem;
+        font-weight: 800;
+      }
+
+      .highlight-text {
+        margin-top: 8px;
+        line-height: 1.7;
+        color: #e7ddff;
+      }
+
+      .highlight a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 11px 16px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #101828;
+        font-weight: 700;
+      }
+
+      .socials {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 0 18px 20px;
+        margin: 20px 0px 20px;
+      }
+
+      .social-btn {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        transition: 0.25s ease;
+        font-weight: 700;
+      }
+
+      .social-btn:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .footer {
+        margin: 20px 0px 20px;
+        text-align: center;
+        padding: 0 18px 24px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .footer a {
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      body.light {
+        --bg: #c6f6ff;
+        --bg-soft: rgba(10, 19, 34, 0.05);
+        --card: rgba(255, 255, 255, 0.9);
+        --text: #0f172a;
+        --muted: #4b5563;
+        --line: rgba(15, 23, 42, 0.08);
+        --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+        background:
+          radial-gradient(circle at top left, rgba(124, 58, 237, 0.15), transparent 100%),
+          radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.12), transparent 0%),
+          linear-gradient(135deg, #c6f6ff 0%, #d4fbff 50%, #e0fdff 100%);
+      }
+
+      body.light .bio,
+      body.light .highlight-text {
+        color: #334155;
+      }
+
+      body.light .highlight {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(34, 197, 94, 0.08));
+      }
+
+      body.light .highlight-label {
+        color: #7c31ff;
+      }
+
+      @media (max-width: 480px) {
+        .hero {
+          padding: 22px 18px 16px;
+        }
+
+        h1 {
+          font-size: 1.65rem;
+        }
+
+        .link-card {
+          grid-template-columns: 44px 1fr auto;
+          padding: 13px;
+        }
+
+        .icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="shell">
+        <section class="card hero">
+          <div class="toolbar">
+            <button class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện sáng tối">
+              🌙 Chế độ tối
+            </button>
+          </div>
+
+          <div class="profile">
+            <div class="avatar-wrap">
+              <img
+                class="avatar"
+                src="https://cdn.discordapp.com/attachments/951857604026589274/1494363838718545930/image0.jpg?ex=69e25647&is=69e104c7&hm=d776593debb1274b8771eb4bdd5a4987baa36900de8f65d06b02dd78b20a6058&"
+                alt="Ảnh đại diện"
+              />
+            </div>
+
+            <h1><span style="font-family: 'Courier New', monospace; word-spacing: -8px;letter-spacing: -1px;">Trần Tiến Khoa</span></h1>
+            <div class="handle">@Teeka</div>
+            <p class="bio">
+              Nhà sáng tạo nội dung • Freelancer • Builder. Mình chia sẻ về công việc,
+              dự án cá nhân và những nơi bạn có thể kết nối với mình. (nội dung mẫu)
+            </p>
+
+            <div class="pills">
+              <span class="pill">Portfolio</span>
+              <span class="pill">Content Creator</span>
+              <span class="pill">Available for work</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="highlight">
+          <div class="highlight-label">Nổi bật</div>
+          <div class="highlight-title">Something will be here</div>
+          <div class="highlight-text">
+            Đây là block nổi bật để bạn gắn sản phẩm, khóa học, landing page hoặc một CTA quan trọng nhất.
+          </div>
+          <a href="NONE" target="_blank" rel="noreferrer">
+            Xem ngay ↗
+          </a>
+        </section>
+
+        <section class="card section">
+          <!-- <div class="section-title">
+            <span>Liên kết của tôi</span>
+            <span>6 mục</span>
+          </div> -->
+
+          <div class="links">
+
+            <a class="link-card" href="https://github.com/KhoaT53" target="_blank" rel="noreferrer">
+              <div class="icon">💻</div>
+              <div class="link-text">
+                <div class="link-title">GitHub</div>
+                <div class="link-desc">Source code, project cá nhân</div>
+              </div>
+              <div class="arrow">↗</div>
+            </a>
+
+            <a class="link-card" href="NONE" target="_blank" rel="noreferrer">
+              <div class="icon">💼</div>
+              <div class="link-text">
+                <div class="link-title">LinkedIn</div>
+                <div class="link-desc">Kết nối công việc, kinh nghiệm và network</div>
+              </div>
+              <div class="arrow">↗</div>
+            </a>
+
+            <a class="link-card" href="https://www.instagram.com/tee.ka._?igsh=YjFiNGxveXdzb2Y0&utm_source=qr" target="_blank" rel="noreferrer">
+              <div class="icon">📸</div>
+              <div class="link-text">
+                <div class="link-title">Instagram</div>
+                <div class="link-desc">Hình ảnh, cuộc sống hằng ngày</div>
+              </div>
+              <div class="arrow">↗</div>
+            </a>
+
+            <a class="link-card" href="mailto:tienkhoa0503@gmail.com">
+              <div class="icon">✉️</div>
+              <div class="link-text">
+                <div class="link-title">Email hợp tác</div>
+                <div class="link-desc">tienkhoa0503@gmail.com</div>
+              </div>
+              <div class="arrow">↗</div>
+            </a>
+          </div>
+        </section>
+
+        <div class="socials">
+          <a style="font-size: 23px;" class="social-btn" href="https://www.facebook.com/share/1CRR6dnqQH/?mibextid=wwXIfr" target="_blank" rel="noreferrer" aria-label="Facebook">f</a>
+          <a style="font-size: 16px;"class="social-btn" href="https://www.instagram.com/tee.ka._?igsh=YjFiNGxveXdzb2Y0&utm_source=qr" target="_blank" rel="noreferrer" aria-label="Instagram">[◉°]</a>
+          <a style="font-size: 25px;"class="social-btn" href="NONE" target="_blank" rel="noreferrer" aria-label="TikTok">♪</a>
+          <a style="font-size: 23px;"class="social-btn" href="NONE" target="_blank" rel="noreferrer" aria-label="X">𝕏</a>
+          <a style="font-size: 17px;"class="social-btn" href="https://github.com/KhoaT53" target="_blank" rel="noreferrer" aria-label="GitHub">&lt/&gt</a>
+        </div>
+
+        <div class="footer">
+          Made with ❤️
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const body = document.body;
+      const toggleBtn = document.getElementById("themeToggle");
+      const savedTheme = localStorage.getItem("bio-theme");
+
+      function applyTheme(theme) {
+        const isLight = theme === "light";
+        body.classList.toggle("light", isLight);
+        toggleBtn.textContent = isLight ? "☀️ Chế độ sáng" : "🌙 Chế độ tối";
+      }
+
+      applyTheme(savedTheme || "dark");
+
+      toggleBtn.addEventListener("click", () => {
+        const nextTheme = body.classList.contains("light") ? "dark" : "light";
+        localStorage.setItem("bio-theme", nextTheme);
+        applyTheme(nextTheme);
+      });
+    </script>
+  </body>
+</html>
